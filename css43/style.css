@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+}
+
+#burbujas-container {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.burbuja {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 255, 247, 0.306);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+.burbuja {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 255, 247, 0.306);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+
+    /* animación aplicada */
+    animation-name: subir;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
