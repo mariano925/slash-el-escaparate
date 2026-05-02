@@ -3,60 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <!-- 
-        EVITAR: No olvidar esta línea. 
-        POR QUÉ: Sin el 'viewport', el celular intentaría renderizar 
-        la web como una PC, haciendo que todo se vea diminuto.
+        LO OBVIO: Si no pongo esta línea, tu celular va a intentar mostrar la web 
+        como si fuera un monitor de tubo de 1995. Suerte tratando de leer algo 
+        sin usar una lupa. 
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efecto Burbujas Responsive</title>
+
     <!-- 
-        ESTRUCTURA: El CSS se carga en el head para que la página 
-        tenga estilo desde el primer segundo que aparece.
+        ESTÉTICA: Acá conectamos el CSS. Es básicamente el maquillaje de la página. 
+        Sin esto, solo verías texto blanco sobre fondo negro, muy aburrido.
     -->
     <link rel="stylesheet" href="css43/style.css">
 </head>
 <body>
     <!-- 
-        CAPA DE FONDO (Layer 0): 
-        EVITAR: No mezclar este contenedor con el contenido de texto.
-        POR QUÉ: Al estar separado, las burbujas no interfieren con la lectura 
-        ni bloquean la interacción del usuario con los botones o el texto.
+        EL PELOTERO (Layer 0): 
+        Este div está más vacío que mi cuenta bancaria, pero el JavaScript lo va 
+        a llenar de burbujas. Lo dejamos separado para que las burbujas no te 
+        pateen el texto cuando quieras leer. Se llama "orden", busquenlo.
     -->
     <div id="burbujas-container"></div>
 
     <!-- 
-        CAPA DE CONTENIDO (Layer 1): 
-        ESTRUCTURA: Usamos <main> por semántica. Es el contenedor que "flota"
-        gracias al z-index en CSS, creando la sensación de profundidad.
+        EL CONTENIDO (Donde ocurre la magia): 
+        Uso <main> porque soy un técnico con estándares. Este bloque flota 
+        encima de todo. Es como la crema en el café: lo de arriba es lo que importa.
     -->
     <main class="main-wrapper">
+        <!-- 
+            GLASS-CARD: El famoso efecto "vidrio esmerilado". 
+            Si no tiene transparencias y desenfoque, no es una web del 2026, 
+            es un archivo de Word subido a la red.
+        -->
         <div class="glass-card">
-            <!-- Título con gancho visual -->
             <h1>Tu Vidriera al Mundo</h1>
             
-            <!-- Mensaje Artesanal: Explicando el valor de la web -->
             <p>
                 Una página web es como un <strong>taller que nunca cierra</strong>. 
-                Es el espacio donde tus ideas y servicios dejan de ser locales 
-                para volverse universales, conectando con las personas las 24 horas.
+                (A diferencia de la ferretería del barrio, esta no se toma dos horas de siesta).
             </p>
 
             <p>
-                En esta interfaz, la precisión técnica y el diseño se funden 
-                para demostrar que estar presente en la red es mucho más que existir: 
-                es <strong>generar confianza</strong> a través de la innovación.
+                Acá mezclamos lógica y diseño para demostrar que estar en internet 
+                es mucho más que tener un perfil de Facebook abandonado.
             </p>
 
-            <div id="dinamico">
-                <!-- El JS inyectará aquí el estado del sistema para dar un toque tecnológico -->
-            </div>
+            <!-- 
+                DINÁMICO: Espacio reservado para que el JS escriba cosas. 
+                Por ahora está esperando órdenes, como ayudante de electricista en su primer día.
+            -->
+            <div id="dinamico"></div>
         </div>
     </main>
 
     <!-- 
-        LÓGICA DE CONTROL:
-        POSICIÓN: Se carga al final para asegurar que el usuario vea la estructura 
-        mientras el motor de burbujas se inicializa.
+        EL CEREBRO: Llamamos al script al final. 
+        Primero queremos que veas la cara del sitio y después que empiece a funcionar. 
+        Nadie tiene tiempo para esperar a que un código cargue antes de ver el título.
     -->
     <script src="script.js"></script>
 </body>
