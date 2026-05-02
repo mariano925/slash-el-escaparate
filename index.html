@@ -1,13 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <!-- 
+        EVITAR: No olvidar esta línea. 
+        POR QUÉ: Sin el 'viewport', el celular intentaría renderizar 
+        la web como una PC, haciendo que todo se vea diminuto.
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>burbujas</title>
+    <title>Efecto Burbujas Responsive</title>
+    <!-- 
+        ESTRUCTURA: El CSS se carga en el head para que la página 
+        tenga estilo desde el primer segundo que aparece.
+    -->
     <link rel="stylesheet" href="css43/style.css">
 </head>
 <body>
-    <div id="burbujas-container"></div>  
-    <script src="script.js"></script> 
+    <!-- 
+        CAPA DE FONDO (Layer 0): 
+        EVITAR: No mezclar este contenedor con el contenido de texto.
+        POR QUÉ: Al estar separado, las burbujas no interfieren con la lectura 
+        ni bloquean la interacción del usuario con los botones o el texto.
+    -->
+    <div id="burbujas-container"></div>
+
+    <!-- 
+        CAPA DE CONTENIDO (Layer 1): 
+        ESTRUCTURA: Usamos <main> por semántica. Es el contenedor que "flota"
+        gracias al z-index en CSS, creando la sensación de profundidad.
+    -->
+    <main class="main-wrapper">
+        <div class="glass-card">
+            <!-- Título con gancho visual -->
+            <h1>Tu Vidriera al Mundo</h1>
+            
+            <!-- Mensaje Artesanal: Explicando el valor de la web -->
+            <p>
+                Una página web es como un <strong>taller que nunca cierra</strong>. 
+                Es el espacio donde tus ideas y servicios dejan de ser locales 
+                para volverse universales, conectando con las personas las 24 horas.
+            </p>
+
+            <p>
+                En esta interfaz, la precisión técnica y el diseño se funden 
+                para demostrar que estar presente en la red es mucho más que existir: 
+                es <strong>generar confianza</strong> a través de la innovación.
+            </p>
+
+            <div id="dinamico">
+                <!-- El JS inyectará aquí el estado del sistema para dar un toque tecnológico -->
+            </div>
+        </div>
+    </main>
+
+    <!-- 
+        LÓGICA DE CONTROL:
+        POSICIÓN: Se carga al final para asegurar que el usuario vea la estructura 
+        mientras el motor de burbujas se inicializa.
+    -->
+    <script src="script.js"></script>
 </body>
 </html>

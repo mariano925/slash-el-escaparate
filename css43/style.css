@@ -1,57 +1,217 @@
+/* 
+    RESET UNIVERSAL:
+    EVITAR: No trabajar sin 'box-sizing: border-box'.
+    POR QUÉ: Sin esto, al agregar padding los elementos crecen y rompen el layout.
+    Con esto, el tamaño que definís es el que se mantiene.
+*/
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
 }
 
 body {
     background: #000;
     color: #fff;
-    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
+/* Fondo: Ocupa toda la pantalla pero se queda atr�s */
 #burbujas-container {
     position: fixed;
     inset: 0;
-    overflow: hidden;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 1;
 }
 
 .burbuja {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 255, 247, 0.306);
+    bottom: -20px;
+    background: rgba(0, 255, 247, 0.5);
     border-radius: 50%;
-    opacity: 0;
-    pointer-events: none;
-    z-index: -1;
+    animation-name: subir;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Contenido: Se posiciona sobre las burbujas */
+.main-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Tarjeta responsive con efecto cristal */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.glass-card h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.glass-card p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+}
+
+#dinamico {
+    font-size: 0.875rem;
+    color: rgba(0, 255, 247, 0.8);
+    margin-top: 1rem;
+    font-weight: 500;
 }
 
 @keyframes subir {
     0% {
         transform: translateY(0);
+        opacity: 0;
+    }
+    20% {
         opacity: 1;
     }
     100% {
-        transform: translateY(-100vh);
+        transform: translateY(-110vh);
         opacity: 0;
     }
 }
 
-.burbuja {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 255, 247, 0.306);
-    border-radius: 50%;
-    opacity: 0;
-    pointer-events: none;
-    z-index: -1;
-
-    /* animación aplicada */
-    animation-name: subir;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
+/* Pantallas muy peque�as: < 360px */
+@media (max-width: 359px) {
+    .main-wrapper {
+        padding: 15px;
+    }
+    
+    .glass-card {
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .glass-card h1 {
+        font-size: 1.5rem;
+    }
+    
+    .glass-card p {
+        font-size: 0.875rem;
+    }
+    
+    #dinamico {
+        font-size: 0.75rem;
+    }
 }
 
+/* Smartphones peque�os: 360px - 480px */
+@media (min-width: 360px) and (max-width: 480px) {
+    .main-wrapper {
+        padding: 16px;
+    }
+    
+    .glass-card {
+        padding: 20px;
+        border-radius: 16px;
+    }
+    
+    .glass-card h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .glass-card p {
+        font-size: 0.95rem;
+    }
+    
+    #dinamico {
+        font-size: 0.8rem;
+    }
+}
+
+/* Smartphones medianos y tablets en portrait: 481px - 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+    .main-wrapper {
+        padding: 20px;
+    }
+    
+    .glass-card {
+        padding: 25px;
+        max-width: 450px;
+    }
+    
+    .glass-card h1 {
+        font-size: 2rem;
+    }
+    
+    .glass-card p {
+        font-size: 1rem;
+    }
+}
+
+/* Tablets y dispositivos grandes */
+@media (min-width: 769px) {
+    .main-wrapper {
+        padding: 20px;
+    }
+    
+    .glass-card {
+        padding: 30px;
+        max-width: 500px;
+    }
+}
+
+/* Landscape en m�viles */
+@media (max-height: 600px) and (orientation: landscape) {
+    .main-wrapper {
+        min-height: auto;
+        padding: 10px 20px;
+    }
+    
+    .glass-card {
+        padding: 15px 25px;
+    }
+    
+    .glass-card h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .glass-card p {
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    #dinamico {
+        font-size: 0.75rem;
+    }
+}
+
+/* Touch devices optimization */
+@media (hover: none) and (pointer: coarse) {
+    .glass-card {
+        padding: 25px;
+    }
+}
