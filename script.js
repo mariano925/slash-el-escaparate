@@ -18,13 +18,17 @@ window.addEventListener('DOMContentLoaded', () => {
         burbujaActiva = true;
         const burbuja = document.createElement('div');
         burbuja.classList.add('burbuja');
-
-        // Posición y tamaño aleatorio
-        const posicion = Math.random() * 100;
-        const size = Math.random() * 12 + 8; // Tamaño entre 8-20px
-        const opacidad = Math.random() * 0.4 + 0.2; // Opacidad entre 0.2-0.6
-        const duracion = Math.random() * 2.5 + 2.5; // Duración entre 2.5-5s
-
+// --- CIRCUITO RESPONSIVE (¡ACTUALIZADO UN 30% MÁS A LA DERECHA!) ---
+        const isMobile = window.innerWidth < 600;
+        
+        // Antes en celu el maxRange era 40 para que no se corten. 
+        // Ahora lo estiramos a 70 (un 30% más de pista hacia la derecha).
+        // En la compu lo subimos a 85 para que usen todo el monitor de lado a lado.
+        const maxRange = isMobile ? 70 : 85; 
+        const minOffset = 5;                 
+        
+        // Calcula el punto de inicio en porcentaje (X) usando el nuevo rango estirado
+        const randomX = Math.floor(Math.random() * maxRange) + minOffset;
         burbuja.style.left = posicion + '%';
         burbuja.style.width = size + 'px';
         burbuja.style.height = size + 'px';
@@ -167,27 +171,13 @@ document.addEventListener("DOMContentLoaded", () => {
         burbuja.classList.add("burbuja-flotante");
         burbuja.textContent = frase;
 
-        // Detectar si es un dispositivo móvil (ancho menor a 768px)
-        const isMobile = window.innerWidth < 768;
-
-        // CÁLCULOS ALEATORIOS PARA LA DISTRIBUCIÓN
-        // En móviles, restringir la posición entre 5% y 50% para evitar desbordes
-        // En escritorio, mantener entre 5% y 85%
-        let randomX;
-        if (isMobile) {
-            randomX = Math.floor(Math.random() * 45) + 5;
-        } else {
-            randomX = Math.floor(Math.random() * 80) + 5;
-        }
-
         // Retraso al azar para que vayan saliendo escalonadas (de 0 a 8 segundos)
         const randomDelay = (Math.random() * 8).toFixed(2);
 
         // Velocidad de subida al azar (entre 12 y 22 segundos para que unas pasen a otras)
         const randomDuration = (12 + Math.random() * 10).toFixed(2);
 
-        // Aplicamos los estilos en línea dinámicamente
-        burbuja.style.left = `${randomX}%`;
+        // Aplicamos los estilos de animación en línea
         burbuja.style.animationDelay = `${randomDelay}s`;
         burbuja.style.animationDuration = `${randomDuration}s`;
 
@@ -196,5 +186,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Metemos la burbuja en el contenedor de fondo
         container.appendChild(burbuja);
+
+        // CÁLCULO DINÁMICO DE DISTRIBUCIÓN HORIZONTAL (sin cortes)
+        // Ahora que está en el DOM, podemos medir su ancho real en la pantalla
+        const anchoBurbuja = burbuja.offsetWidth;
+        // Calculamos el espacio máximo: el ancho de la pantalla menos el ancho de la frase
+        // y le restamos 35px extra para absorber el vaivén del zig-zag a la derecha sin cortarse.
+        const maxPx = window.innerWidth - anchoBurbuja - 35; 
+        const maxPorcentaje = (maxPx / window.innerWidth) * 100;
+        
+        // Posición horizontal al azar asegurando que ocupe todo el espacio seguro disponible
+        const randomX = Math.random() * (maxPorcentaje - 5) + 5;
+        burbuja.style.left = `${randomX}%`;
     });
 });
