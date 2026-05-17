@@ -308,30 +308,43 @@ body {
     animation: flotarHaciaElTecho infinite linear;
 }
 
-/* 3. EL MOVIMIENTO (Subida recta con un leve bamboleo) */
+/* 3. EL MOVIMIENTO (Subida con un rápido zig-zag horizontal) */
 @keyframes flotarHaciaElTecho {
     0% {
         transform: translateY(0) translateX(0) rotate(0deg);
         opacity: 0;
     }
-
     10% {
+        transform: translateY(-11.5vh) translateX(25px) rotate(4deg);
         opacity: 1;
-        /* Aparece suavemente al entrar a la pantalla */
     }
-
+    20% {
+        transform: translateY(-23vh) translateX(-25px) rotate(-4deg);
+    }
+    30% {
+        transform: translateY(-34.5vh) translateX(25px) rotate(4deg);
+    }
+    40% {
+        transform: translateY(-46vh) translateX(-25px) rotate(-4deg);
+    }
     50% {
-        /* Un pequeño balanceo hacia el costado a mitad de camino para que sea orgánico */
-        transform: translateY(-50vh) translateX(15px) rotate(2deg);
+        transform: translateY(-57.5vh) translateX(25px) rotate(4deg);
     }
-
+    60% {
+        transform: translateY(-69vh) translateX(-25px) rotate(-4deg);
+    }
+    70% {
+        transform: translateY(-80.5vh) translateX(25px) rotate(4deg);
+    }
+    80% {
+        transform: translateY(-92vh) translateX(-25px) rotate(-4deg);
+    }
     90% {
+        transform: translateY(-103.5vh) translateX(25px) rotate(4deg);
         opacity: 1;
     }
-
     100% {
-        /* Pasa el techo de la pantalla y desaparece */
-        transform: translateY(-115vh) translateX(-10px) rotate(-2deg);
+        transform: translateY(-115vh) translateX(-25px) rotate(-4deg);
         opacity: 0;
     }
 }
