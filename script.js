@@ -83,9 +83,18 @@ document.addEventListener("DOMContentLoaded", () => {
         burbuja.classList.add("burbuja-flotante");
         burbuja.textContent = frase;
 
+        // Detectar si es un dispositivo móvil (ancho menor a 768px)
+        const isMobile = window.innerWidth < 768;
+
         // CÁLCULOS ALEATORIOS PARA LA DISTRIBUCIÓN
-        // Posición horizontal al azar (entre 5% y 85% para que no se corten en los bordes)
-        const randomX = Math.floor(Math.random() * 80) + 5;
+        // En móviles, restringir la posición entre 5% y 50% para evitar desbordes
+        // En escritorio, mantener entre 5% y 85%
+        let randomX;
+        if (isMobile) {
+            randomX = Math.floor(Math.random() * 45) + 5;
+        } else {
+            randomX = Math.floor(Math.random() * 80) + 5;
+        }
 
         // Retraso al azar para que vayan saliendo escalonadas (de 0 a 8 segundos)
         const randomDelay = (Math.random() * 8).toFixed(2);
