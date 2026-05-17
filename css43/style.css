@@ -14,12 +14,14 @@ html {
 }
 
 body {
-    background: #000; /* Negro absoluto, como mi paciencia cuando no anda el código */
+    background: #000;
+    /* Negro absoluto, como mi paciencia cuando no anda el código */
     color: #fff;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
 }
+
 /* 
     CAPA DE FONDO (El pelotero): 
     Acá es donde viven las burbujas. Tiene 'z-index: 1' porque es el fondo. 
@@ -33,6 +35,7 @@ body {
     pointer-events: none;
     z-index: 1;
 }
+
 /* 
     LA BURBUJA: 
     Tiene 'will-change' y 'translateZ(0)'. Es como decirle al celular: 
@@ -107,6 +110,7 @@ body {
     margin-top: 1rem;
     font-weight: 500;
 }
+
 /* 
     ANIMACIÓN: 
     No movemos las burbujas con 'top' o 'bottom' porque somos profesionales. 
@@ -117,9 +121,11 @@ body {
         transform: translateY(0);
         opacity: 0;
     }
+
     20% {
         opacity: 1;
     }
+
     100% {
         transform: translateY(-110vh);
         opacity: 0;
@@ -131,20 +137,20 @@ body {
     .main-wrapper {
         padding: 15px;
     }
-    
+
     .glass-card {
         padding: 15px;
         border-radius: 15px;
     }
-    
+
     .glass-card h1 {
         font-size: 1.5rem;
     }
-    
+
     .glass-card p {
         font-size: 0.875rem;
     }
-    
+
     #dinamico {
         font-size: 0.75rem;
     }
@@ -155,21 +161,21 @@ body {
     .main-wrapper {
         padding: 16px;
     }
-    
+
     .glass-card {
         padding: 20px;
         border-radius: 16px;
     }
-    
+
     .glass-card h1 {
         font-size: 1.75rem;
         margin-bottom: 0.75rem;
     }
-    
+
     .glass-card p {
         font-size: 0.95rem;
     }
-    
+
     #dinamico {
         font-size: 0.8rem;
     }
@@ -180,16 +186,16 @@ body {
     .main-wrapper {
         padding: 20px;
     }
-    
+
     .glass-card {
         padding: 25px;
         max-width: 450px;
     }
-    
+
     .glass-card h1 {
         font-size: 2rem;
     }
-    
+
     .glass-card p {
         font-size: 1rem;
     }
@@ -200,7 +206,7 @@ body {
     .main-wrapper {
         padding: 20px;
     }
-    
+
     .glass-card {
         padding: 30px;
         max-width: 500px;
@@ -213,21 +219,21 @@ body {
         min-height: auto;
         padding: 10px 20px;
     }
-    
+
     .glass-card {
         padding: 15px 25px;
     }
-    
+
     .glass-card h1 {
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
     }
-    
+
     .glass-card p {
         font-size: 0.9rem;
         margin-bottom: 0.75rem;
     }
-    
+
     #dinamico {
         font-size: 0.75rem;
     }
@@ -237,5 +243,73 @@ body {
 @media (hover: none) and (pointer: coarse) {
     .glass-card {
         padding: 25px;
+    }
+}
+
+/* 1. EL CONTENEDOR GENERAL (Atrás de todo) */
+#burbujas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+    /* Obliga a las frases a flotar POR DETRÁS de la glass-card */
+    pointer-events: none;
+    /* Si una frase pasa por encima de un botón, te deja clickear igual */
+}
+
+/* 2. LAS FRASES INDIVIDUALES (Actuando como burbujas) */
+.burbuja-flotante {
+    position: absolute;
+    bottom: -100px;
+    /* Arrancan abajo de todo, escondidas */
+
+    /* Estética Glassmorphism combinada */
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 12px 20px;
+    border-radius: 30px;
+    /* Bordes bien redondeados de burbuja */
+
+    /* Tipografía */
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    /* Evita que el texto se rompa en dos líneas */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+
+    /* Animación infinita hacia arriba */
+    animation: flotarHaciaElTecho infinite linear;
+}
+
+/* 3. EL MOVIMIENTO (Subida recta con un leve bamboleo) */
+@keyframes flotarHaciaElTecho {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+        /* Aparece suavemente al entrar a la pantalla */
+    }
+
+    50% {
+        /* Un pequeño balanceo hacia el costado a mitad de camino para que sea orgánico */
+        transform: translateY(-50vh) translateX(15px) rotate(2deg);
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        /* Pasa el techo de la pantalla y desaparece */
+        transform: translateY(-115vh) translateX(-10px) rotate(-2deg);
+        opacity: 0;
     }
 }
