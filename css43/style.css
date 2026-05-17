@@ -56,38 +56,60 @@ body {
     backface-visibility: hidden;
 }
 
-/* 
-    LA TARJETA DE CRISTAL (Glassmorphism): 
-    Acá es donde gasté todo el presupuesto visual. 
-    El 'backdrop-filter' es el que hace que las burbujas se vean borrosas 
-    cuando pasan por atrás, como si fuera un vidrio esmerilado de oficina cara.
-*/
+/* ==========================================================================
+   EL CONTENEDOR PRINCIPAL (.main-wrapper)
+   --------------------------------------------------------------------------
+   ¿Para qué sirve? Es el marco que sostiene la tarjeta de vidrio en la pantalla.
+   
+   ¿Por qué lo cambiamos? Antes usábamos 'center' y la tarjeta se clavaba en el 
+   medio de la pantalla, tapando todo. Al cambiarlo a 'flex-start', obligamos 
+   a la tarjeta a irse para arriba de todo. 
+   
+   Le dejamos un 'padding-top' del 5% de la pantalla (5vh) para que no quede 
+   pegada al techo del celular como si estuviera mal cortada. Así liberamos casi 
+   un 40% de espacio abajo para que las burbujas humorísticas tengan pista libre 
+   para flotar y cruzarse sin estorbar la lectura.
+   ========================================================================== */
 .main-wrapper {
-    position: relative;
-    z-index: 10;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    align-items: flex-start; /* Clava la tarjeta arriba. Chau al centrado del medio. */
+    padding-top: 5vh;        /* El airecito que le dejamos entre el techo y la tarjeta */
+    min-height: 100vh;       /* Fuerza al contenedor a ocupar toda la altura del visor */
+    width: 100%;
+    box-sizing: border-box;  /* Evita que los paddings deformen el ancho total de la pantalla */
 }
 
-/* 
-    LA TARJETA DE CRISTAL (Glassmorphism): 
-    Acá es donde gasté todo el presupuesto visual. 
-    El 'backdrop-filter' es el que hace que las burbujas se vean borrosas 
-    cuando pasan por atrás, como si fuera un vidrio esmerilado de oficina cara.
-*/
+/* ==========================================================================
+   LA TARJETA DE VIDRIO (.glass-card)
+   --------------------------------------------------------------------------
+   ¿Para qué sirve? Es tu vidriera virtual, donde va el texto importante de la web.
+   
+   ¿Por qué lo cambiamos? Antes era muy ancha (unos 600px). En la compu zafaba, 
+   pero en el celular era un masacote que tapaba el fondo. 
+   
+   La achicamos un 40% poniéndole un tope de 360px de ancho máximo (max-width). 
+   También le bajamos el espacio interno (padding) a 20px para que el texto quede 
+   más compacto. 
+   
+   El 'width: 85%' es la red de seguridad: si la pantalla del celular es muy 
+   vieja o angosta, la tarjeta se encoge sola y deja un 15% de margen libre para 
+   no tocar los bordes del teléfono. El resto es puro maquillaje traslúcido.
+   ========================================================================== */
 .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 30px;
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
+    width: 85%;             /* Margen de seguridad para que nunca toque los bordes del celu */
+    max-width: 360px;       /* El tope de ancho. Un 40% más compacta y estilizada */
+    padding: 20px;          /* Achicamos el aire interno para que los textos queden juntos */
+    margin-top: 2vh;        /* El empujoncito final para terminar de acomodarla arriba */
+    
+    /* MAQUILLAJE: Efecto esmerilado para que parezca una web moderna y no un Word */
+    background: rgba(255, 255, 255, 0.1);       /* Capa blanca casi invisible (10% de opacidad) */
+    backdrop-filter: blur(10px);                /* El esmerilado que desenfoca las burbujas al pasar atrás */
+    -webkit-backdrop-filter: blur(10px);        /* Soporte obligatorio para que se vea igual en iPhones */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* El "borde brillante" que simula el reflejo del vidrio */
+    border-radius: 15px;                        /* Esquinas redondeadas para suavizar las puntas */
+    color: #fff;                                /* Texto blanco puro para que contraste con el fondo */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Sombra oscura abajo para darle profundidad y despegue */
 }
 
 .glass-card h1 {
